@@ -20,6 +20,15 @@ System.Console.WriteLine(vip);
 var (title, duration, isAvailable) = subscriber; // class 에서 구현할 경우는 Deconstruct() 를 구현해야 하지만 record에서는 바로 가능
 System.Console.WriteLine($"{title} - {duration} - {isAvailable}");
 
+// [4] pattern matching
+Subscriber membership = new Subscriber("VIP", 1, true);
+var membershipDescription = membership switch
+{
+  not Subscriber => "No Problem", // Type pattern
+  _ => "No Membership" // discard : switch 의 default 와 같음
+};
+System.Console.WriteLine($"{membershipDescription}");
+
 // [2] init accessors
 class Sponsor
 {
@@ -44,4 +53,3 @@ record Code : Subscriber
 {
   public Code(string Title, int Duration, bool isAvailable) : base(Title, Duration, isAvailable) { }
 }
-
