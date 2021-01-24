@@ -21,10 +21,13 @@ var (title, duration, isAvailable) = subscriber; // class 에서 구현할 경�
 System.Console.WriteLine($"{title} - {duration} - {isAvailable}");
 
 // [4] pattern matching
-Subscriber membership = new Subscriber("VIP", 1, true);
+Subscriber membership = new Visual("VIP", 1, true);
 var membershipDescription = membership switch
 {
-  not Subscriber => "No Problem", // Type pattern
+  Visual and { Title: "VIP" } => "VIP Membership", // positional pattern
+  // title 은 머가 와도 상관없다는 뜻 '_'
+  Visual and (_, 1, true) => "Welcome VIP", // positional pattern
+  not Visual => "No Problem", // Type pattern
   _ => "No Membership" // discard : switch 의 default 와 같음
 };
 System.Console.WriteLine($"{membershipDescription}");
