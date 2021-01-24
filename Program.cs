@@ -4,7 +4,7 @@
   DisplayName = "Red"
 };
 
-sponsor.DisplayName = "RedPlus"; // mutable
+//sponsor.DisplayName = "RedPlus"; // mutable -> init -> immutable
 
 DisplayName(sponsor);
 
@@ -13,6 +13,6 @@ static void DisplayName(Sponsor sponsor) =>
 
 struct Sponsor
 {
-  public int Id { get; set; }
-  public string DisplayName { get; set; }
+  public int Id { get; init; }
+  public string DisplayName { get; init; } // 초기화 전용 setter
 }
