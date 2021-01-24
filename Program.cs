@@ -4,6 +4,8 @@
   DisplayName = "Red"
 };
 
+sponsor.DisplayName = "RedPlus"; // mutable
+
 DisplayName(sponsor);
 
 static void DisplayName(Sponsor sponsor) =>
