@@ -1,4 +1,8 @@
-﻿var sponsor = new Sponsor
+﻿/// <summary>
+/// Top Level Statements
+/// </summary>
+System.Console.WriteLine($"Hello, {args[0]}"); // 실행 > 구성 > Default > 인수 에서 args[0] 지정 가능
+var sponsor = new Sponsor
 {
   Id = 1,
   DisplayName = "Red"
