@@ -17,6 +17,8 @@ var subscriber = new Subscriber("Visual", 2);
 System.Console.WriteLine(subscriber);
 var vip = subscriber with { Title = "VIP" };
 System.Console.WriteLine(vip);
+var (title, duration) = subscriber; // class 에서 구현할 경우는 Deconstruct() 를 구현해야 하지만 record에서는 바로 가능
+System.Console.WriteLine($"{title} - {duration}");
 
 // [2] init accessors
 class Sponsor
