@@ -21,22 +21,31 @@ var (title, duration, isAvailable) = subscriber; // class 에서 구현할 경�
 System.Console.WriteLine($"{title} - {duration} - {isAvailable}");
 
 // [4] pattern matching
-//Subscriber membership = new Visual("VIP", 1, true);
-Subscriber membership = new Studio("Sponsor", 1, true);
+//Subscriber membership = new Visual("VIP", 1, true); //[C]
+//Subscriber membership = new Studio("Sponsor", 2, true); //[B]
+Subscriber membership = new Code("Champion", 2, true); //[A]
 var membershipDescription = membership switch
 {
+  // pattern expression
+  //Code and (var t, var d, var i) => $"{t} - {d} - {i}",
+  ("Champion", var d, var i) => $"Champion - {d} - {i}",
+
+
   //[A] Champion(Code)
+  Code c when c.Duration > 1 => $"{c.Title} Membership > 1",
+  Code c => $"{c.Title} Membership",
 
   //[B] Sponsor(Studio)
-  Studio and (_, > 1, _) => "Sponsor Membership > 1", // relational pattern
-  Studio => "Sponsor Membership", // Type pattern
+  (Code and (_, > 1, true)) or (Studio and { Duration: 2 }) => "Multi", // 6.parenthesized pattern
+  Studio and (_, > 1, _) => "Sponsor Membership > 1", // 5.relational pattern
+  Studio => "Sponsor Membership", // 2.Type pattern
 
   //[C] VIP(Visual)
-  Visual and { Title: "VIP" } => "VIP Membership", // property pattern
+  Visual and { Title: "VIP" } => "VIP Membership", // 4.property pattern
   // title 은 머가 와도 상관없다는 뜻 '_'
-  Visual and (_, 1, true) => "Welcome VIP", // positional pattern
-  not Visual => "No Problem", // Type pattern + not
-  _ => "No Membership" // discard : switch 의 default 와 같음
+  Visual and (_, 1, true) => "Welcome VIP", // 3.positional pattern
+  not Visual => "No Problem", // 2.Type pattern + not
+  _ => "No Membership" // 1.discard : switch 의 default 와 같음
 };
 System.Console.WriteLine($"{membershipDescription}");
 
