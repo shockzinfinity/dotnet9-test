@@ -1,12 +1,13 @@
-﻿System.Console.WriteLine("Hello World!");
-
-var sponsor = new Sponsor
+﻿var sponsor = new Sponsor
 {
   Id = 1,
   DisplayName = "Red"
 };
 
-System.Console.WriteLine($"{sponsor.Id} - {sponsor.DisplayName}");
+DisplayName(sponsor);
+
+static void DisplayName(Sponsor sponsor) =>
+  System.Console.WriteLine($"{sponsor.Id} - {sponsor.DisplayName}");
 
 struct Sponsor
 {
