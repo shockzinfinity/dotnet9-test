@@ -21,13 +21,21 @@ var (title, duration, isAvailable) = subscriber; // class 에서 구현할 경�
 System.Console.WriteLine($"{title} - {duration} - {isAvailable}");
 
 // [4] pattern matching
-Subscriber membership = new Visual("VIP", 1, true);
+//Subscriber membership = new Visual("VIP", 1, true);
+Subscriber membership = new Studio("Sponsor", 1, true);
 var membershipDescription = membership switch
 {
-  Visual and { Title: "VIP" } => "VIP Membership", // positional pattern
+  //[A] Champion(Code)
+
+  //[B] Sponsor(Studio)
+  Studio and (_, > 1, _) => "Sponsor Membership > 1", // relational pattern
+  Studio => "Sponsor Membership", // Type pattern
+
+  //[C] VIP(Visual)
+  Visual and { Title: "VIP" } => "VIP Membership", // property pattern
   // title 은 머가 와도 상관없다는 뜻 '_'
   Visual and (_, 1, true) => "Welcome VIP", // positional pattern
-  not Visual => "No Problem", // Type pattern
+  not Visual => "No Problem", // Type pattern + not
   _ => "No Membership" // discard : switch 의 default 와 같음
 };
 System.Console.WriteLine($"{membershipDescription}");
